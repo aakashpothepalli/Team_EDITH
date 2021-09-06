@@ -4,22 +4,28 @@ import 'package:flutter/foundation.dart';
 
 class Package {
   final String category;
-  final Map<String, dynamic> contactDetails;
+  final String contactName;
+  final String contactNumber;
+  final String contactEmail;
   final String description;
   final String packageId;
   final String packageTitle;
   final double price;
   final double rating;
   final String travelAgencyId;
+  final String duration;
   Package(
       {@required this.category,
-      @required this.contactDetails,
+      @required this.contactName,
+      @required this.contactNumber,
+      @required this.contactEmail,
       @required this.description,
       @required this.packageId,
       @required this.packageTitle,
       @required this.price,
       @required this.rating,
-      @required this.travelAgencyId});
+      @required this.travelAgencyId,
+      @required this.duration});
 
   //  copyWith({
   //   String userUuid,
