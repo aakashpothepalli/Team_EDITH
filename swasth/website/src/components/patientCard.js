@@ -5,6 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
 
 const useStyles = makeStyles({
   root: {
@@ -27,13 +28,25 @@ const useStyles = makeStyles({
 export default function PatientCard({patientId,patientName,bookings,category,description}) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
-
+  let [confirmLoading, setConfirmLoading] = React.useState(false);
   async function getDetails(){
     let response = await fetch(`https://team-edith.glitch.me/doctor/patientDetails?patientId=`+patientId);
     let data = await response.json();
     console.log(data);
 
     alert("PatientId - "+data.patientId + "\n Password - "+ data.pass)
+  }
+  async function confirmPackage(packageId){
+    setConfirmLoading(true);
+    let response = await axios.post(`https://team-edith.glitch.me/doctor/confirmPackage`,{
+      packageId,
+      patientId
+    });
+    if(response.status==200){
+      alert("Package confirmed successfully");
+      window.location.reload();
+    }
+
   }
   return (
     <Card className={classes.root}>
@@ -53,18 +66,30 @@ export default function PatientCard({patientId,patientName,bookings,category,des
         <h5>Packages selected</h5>
 
         {bookings.map(booking => (
+          <div>
           <Typography variant="body2" component="p">
             {booking['package']['description']}
           <br />
           
-        </Typography>))
+        </Typography>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
+
+          <CardActions>
+            <Button size="small" color="primary" variant="contained"
+            disabled={booking['confirmed']}
+             style={{backgroundColor:booking['confirmed']==false?null:'green'}}
+              onClick = {()=>confirmPackage(booking['packageId'])}
+            >{booking['confirmed']==false?'Confirm':'Confirmed'}
+            </Button>
+        </CardActions>
+        </div>
+        <br/>
+        </div>))
         }
         
       </CardContent>
       <div style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
-      <CardActions>
-        <Button size="small" color="primary" variant="contained">Confirm</Button>
-      </CardActions>
+      
       <CardActions>
         <Button size="small" color="primary" variant="contained"
           onClick={getDetails}
