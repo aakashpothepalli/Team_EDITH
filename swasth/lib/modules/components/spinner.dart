@@ -39,7 +39,7 @@ class _SpinnerState extends State<Spinner> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    String img = 'logo-light.png';
+    String img = 'assets/logo-light.png';
 
     return Container(
         height: 200,
@@ -91,7 +91,7 @@ class _SpinnerState extends State<Spinner> with SingleTickerProviderStateMixin {
                                       }
                                     },
                                     child: Image.asset(
-                                      'easter.png',
+                                      'assets/easter.png',
                                       height: 50,
                                     ),
                                   ),

@@ -10,8 +10,8 @@ class Package {
   final String description;
   final String packageId;
   final String packageTitle;
-  final double price;
-  final double rating;
+  final String price;
+  final String rating;
   final String travelAgencyId;
   final String duration;
   Package(
