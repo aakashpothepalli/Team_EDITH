@@ -41,6 +41,7 @@ class _ShopState extends State<Shop> {
         return Future<ErrorCategory>.error(ErrorCategory.connectionFailed);
       }
       if (response.statusCode == 200) {
+        print(response);
         return response;
       }
       if (response.statusCode == 400) {
@@ -66,6 +67,9 @@ class _ShopState extends State<Shop> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(
+              height: 50,
+            ),
             Text(
               'Hello there,\nArun',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -98,40 +102,40 @@ class _ShopState extends State<Shop> {
                         } else {
                           var parsedJson =
                               json.decode(snapshot.data.toString());
+                          print(parsedJson);
+                          print(parsedJson['list'].length);
 
-                          return Container(
-                            height: height * 0.65,
-                            child: RawScrollbar(
-                              isAlwaysShown: false,
-                              thumbColor: Palette.darkgreen,
-                              radius: Radius.circular(30),
-                              child: ListView.builder(
-                                itemCount: parsedJson['list'].length,
-                                itemBuilder: (context, index) {
-                                  return PackageCard(
-                                    package: new Package(
-                                        category: parsedJson['list'][index]
-                                            ['category'],
-                                        contactName: parsedJson['list'][index]
-                                            ['contactDetails']['name'],
-                                        contactNumber: parsedJson['list'][index]
-                                            ['contactDetails']['number'],
-                                        contactEmail: parsedJson['list'][index]
-                                            ['contactDetails']['email'],
-                                        description: parsedJson['list'][index]
-                                            ['description'],
-                                        packageId: parsedJson['list'][index]
-                                            ['packageId'],
-                                        packageTitle: parsedJson['list'][index]
-                                            ['packageTitle'],
-                                        price: parsedJson['list'][index]
-                                            ['price'],
-                                        rating: parsedJson['list'][index]['rating'],
-                                        travelAgencyId: parsedJson['list'][index]['travelAgencyId'],
-                                        duration: parsedJson['list'][index]['duration']),
-                                  );
-                                },
-                              ),
+                          return RawScrollbar(
+                            isAlwaysShown: false,
+                            thumbColor: Palette.darkgreen,
+                            radius: Radius.circular(30),
+                            child: ListView.builder(
+                              itemCount: parsedJson['list'].length,
+                              itemBuilder: (context, index) {
+                                return PackageCard(
+                                  package: new Package(
+                                      category: parsedJson['list'][index]
+                                          ['category'],
+                                      contactName: parsedJson['list'][index]
+                                          ['contactDetails']['name'],
+                                      contactNumber: parsedJson['list'][index]
+                                          ['contactDetails']['number'],
+                                      contactEmail: parsedJson['list'][index]
+                                          ['contactDetails']['email'],
+                                      description: parsedJson['list'][index]
+                                          ['description'],
+                                      packageId: parsedJson['list'][index]
+                                          ['packageId'],
+                                      packageTitle: parsedJson['list'][index]
+                                          ['packageTitle'],
+                                      price: parsedJson['list'][index]['price'],
+                                      rating: parsedJson['list'][index]
+                                          ['rating'],
+                                      travelAgencyId: parsedJson['list'][index]
+                                          ['travelAgencyId'],
+                                      duration: parsedJson['list'][index]['duration']),
+                                );
+                              },
                             ),
                           );
                         }
