@@ -20,6 +20,7 @@ class _PackageCardState extends State<PackageCard> {
   bool isLoading = false;
 
   void showDetails(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     showModalBottomSheet(
         backgroundColor: Colors.transparent,
         context: context,
@@ -29,7 +30,7 @@ class _PackageCardState extends State<PackageCard> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24.0),
                 color: Palette.darkgreen),
-            height: 300,
+            height: height * 0.5,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -47,7 +48,7 @@ class _PackageCardState extends State<PackageCard> {
                     height: 8,
                   ),
                   Container(
-                    height: 150,
+                    height: height * 0.3,
                     width: double.infinity,
                     padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
@@ -55,11 +56,9 @@ class _PackageCardState extends State<PackageCard> {
                         color: Palette.lightergreen),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(widget.package.description),
-                        SizedBox(
-                          height: 4,
-                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -90,17 +89,18 @@ class _PackageCardState extends State<PackageCard> {
                         try {
                           response = await ServiceLocator<Api>()
                               .POST(Api.sendBooking, {
-                            "patientId": '12106',
+                            "patientId": '29239',
                             "packageId": widget.package.packageId,
                           });
                           print(response.statusCode);
                           if (response.statusCode == 200) {
+                            print(response);
                             showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
                                   return Dialog(
                                     child: Container(
-                                      height: 200,
+                                      height: 250,
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
                                         crossAxisAlignment:
@@ -137,8 +137,8 @@ class _PackageCardState extends State<PackageCard> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12.0),
                             color: Palette.yellow),
-                        height: 50,
-                        width: 175,
+                        height: 70,
+                        width: 200,
                         child: isLoading
                             ? CircularProgressIndicator()
                             : Column(
@@ -171,7 +171,7 @@ class _PackageCardState extends State<PackageCard> {
       child: Container(
         margin: const EdgeInsets.all(5.0),
         padding: EdgeInsets.all(10),
-        height: 100,
+        height: 110,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
             color: Palette.lightergreen),

@@ -37,6 +37,19 @@ class _SpinnerState extends State<Spinner> with SingleTickerProviderStateMixin {
     animController.repeat();
   }
 
+  Future<void> _launchInBrowser(String url) async {
+    try {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+        headers: <String, String>{'my_header_key': 'my_header_value'},
+      );
+    } catch (e) {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     String img = 'assets/logo-light.png';
@@ -75,20 +88,8 @@ class _SpinnerState extends State<Spinner> with SingleTickerProviderStateMixin {
                                   ),
                                   GestureDetector(
                                     onTap: () async {
-                                      String url =
-                                          'https://www.theraleighregister.com/deathly-hallows.html';
-                                      if (await canLaunch(url)) {
-                                        await launch(
-                                          url,
-                                          forceSafariVC: false,
-                                          forceWebView: false,
-                                          headers: <String, String>{
-                                            'my_header_key': 'my_header_value'
-                                          },
-                                        );
-                                      } else {
-                                        throw 'Could not launch $url';
-                                      }
+                                      _launchInBrowser(
+                                          'https://www.theraleighregister.com/deathly-hallows.html');
                                     },
                                     child: Image.asset(
                                       'assets/easter.png',
