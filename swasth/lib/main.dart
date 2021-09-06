@@ -25,8 +25,7 @@ class MyApp extends StatelessWidget {
       // home: Playground(),
       theme: ThemeData(
           textTheme: GoogleFonts.poppinsTextTheme(),
-          primaryColor: Palette.lightergreen //TODO: CHOSE FONT
-          ),
+          primaryColor: Palette.lightergreen),
       onGenerateRoute: RouterWidget.generateRoute,
     );
   }

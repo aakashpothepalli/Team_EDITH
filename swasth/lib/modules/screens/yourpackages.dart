@@ -39,7 +39,7 @@ class _YourPackagesState extends State<YourPackages> {
         return Future<ErrorCategory>.error(ErrorCategory.connectionFailed);
       }
       if (response.statusCode == 200) {
-        print(response);
+        print('Response received in history:' + response.toString());
         return response;
       }
       if (response.statusCode == 400) {
@@ -54,6 +54,8 @@ class _YourPackagesState extends State<YourPackages> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+
     return Container(
       color: Palette.lightgray,
       child: Column(
@@ -104,7 +106,7 @@ class _YourPackagesState extends State<YourPackages> {
                           for (int i = 0;
                               i < parsedJson['bookings'].length;
                               i++) {
-                            if (parsedJson['bookings'][i]['complete'] ==
+                            if (parsedJson['bookings'][i]['completed'] ==
                                 false) {
                               upcominglist.add(parsedJson['bookings'][i]);
                             }
@@ -113,7 +115,7 @@ class _YourPackagesState extends State<YourPackages> {
                           print(upcominglist);
 
                           return Container(
-                            height: 200,
+                            height: height * 0.32,
                             child: ListView.builder(
                                 itemCount: upcominglist.length,
                                 itemBuilder: (BuildContext context, int index) {
@@ -121,7 +123,8 @@ class _YourPackagesState extends State<YourPackages> {
                                     isComplete: false,
                                     isConfirmed: upcominglist[index]
                                         ['confirmed'],
-                                    title: upcominglist[index]['packageTitle'],
+                                    title: upcominglist[index]['package']
+                                        ['packageTitle'],
                                     packageId: upcominglist[index]['packageId'],
                                   );
                                 }),
@@ -180,7 +183,7 @@ class _YourPackagesState extends State<YourPackages> {
 
                           for (Map<String, dynamic> obj
                               in parsedJson['bookings']) {
-                            if (obj['complete'] == true) {
+                            if (obj['completed'] == true) {
                               completelist.add(obj);
                             }
                           }
@@ -194,7 +197,8 @@ class _YourPackagesState extends State<YourPackages> {
                                     isComplete: true,
                                     isConfirmed: completelist[index]
                                         ['confirmed'],
-                                    title: completelist[index]['packageTitle'],
+                                    title: completelist[index]['package']
+                                        ['packageTitle'],
                                     packageId: completelist[index]['packageId'],
                                   );
                                 }),

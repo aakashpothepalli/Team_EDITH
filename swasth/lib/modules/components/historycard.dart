@@ -33,7 +33,7 @@ class _HistoryCardState extends State<HistoryCard> {
         height: 100,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
-            color: widget.isComplete
+            color: !widget.isComplete
                 ? (widget.isConfirmed ? Palette.lightergreen : Palette.gray)
                 : Palette.darkblue),
         child: Column(
@@ -41,11 +41,11 @@ class _HistoryCardState extends State<HistoryCard> {
           children: [
             Text(
               widget.title,
-              style: titleTextStyle.copyWith(color: Palette.darkblue),
+              style: titleTextStyle,
             ),
             Text(
               "Package ID: $widget.packageId",
-              style: lightTextStyle.copyWith(color: Palette.gray),
+              style: lightTextStyle,
             ),
             SizedBox(
               height: 8,
@@ -62,8 +62,8 @@ class _HistoryCardState extends State<HistoryCard> {
                 : Text(
                     widget.isConfirmed
                         ? "Status: Confirmed!"
-                        : "Status: Pending...",
-                    style: lightTextStyle.copyWith(color: Palette.gray),
+                        : "Status: Awaiting doctor's approval...",
+                    style: lightTextStyle,
                   ),
           ],
         ),

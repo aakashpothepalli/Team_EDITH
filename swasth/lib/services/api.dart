@@ -21,10 +21,10 @@ class Api {
 
   // Getters for API end-points
   static String get getShopList =>
-      'https://team-edith.glitch.me/customer/listPackages?patientId=12106';
+      'https://team-edith.glitch.me/customer/listPackages?patientId=29239';
   static String get sendBooking => 'https://team-edith.glitch.me/customer/book';
   static String get getHistory =>
-      'https://team-edith.glitch.me/doctor/patientDetails?patientId=12106';
+      'https://team-edith.glitch.me/doctor/patientDetails?patientId=29239';
   Api() {
     options = BaseOptions(
       baseUrl: baseUrl,

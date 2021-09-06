@@ -105,38 +105,32 @@ class _ShopState extends State<Shop> {
                           print(parsedJson);
                           print(parsedJson['list'].length);
 
-                          return RawScrollbar(
-                            isAlwaysShown: false,
-                            thumbColor: Palette.darkgreen,
-                            radius: Radius.circular(30),
-                            child: ListView.builder(
-                              itemCount: parsedJson['list'].length,
-                              itemBuilder: (context, index) {
-                                return PackageCard(
-                                  package: new Package(
-                                      category: parsedJson['list'][index]
-                                          ['category'],
-                                      contactName: parsedJson['list'][index]
-                                          ['contactDetails']['name'],
-                                      contactNumber: parsedJson['list'][index]
-                                          ['contactDetails']['number'],
-                                      contactEmail: parsedJson['list'][index]
-                                          ['contactDetails']['email'],
-                                      description: parsedJson['list'][index]
-                                          ['description'],
-                                      packageId: parsedJson['list'][index]
-                                          ['packageId'],
-                                      packageTitle: parsedJson['list'][index]
-                                          ['packageTitle'],
-                                      price: parsedJson['list'][index]['price'],
-                                      rating: parsedJson['list'][index]
-                                          ['rating'],
-                                      travelAgencyId: parsedJson['list'][index]
-                                          ['travelAgencyId'],
-                                      duration: parsedJson['list'][index]['duration']),
-                                );
-                              },
-                            ),
+                          return ListView.builder(
+                            itemCount: parsedJson['list'].length,
+                            itemBuilder: (context, index) {
+                              return PackageCard(
+                                package: new Package(
+                                    category: parsedJson['list'][index]
+                                        ['category'],
+                                    contactName: parsedJson['list'][index]
+                                        ['contactDetails']['name'],
+                                    contactNumber: parsedJson['list'][index]
+                                        ['contactDetails']['number'],
+                                    contactEmail: parsedJson['list'][index]
+                                        ['contactDetails']['email'],
+                                    description: parsedJson['list'][index]
+                                        ['description'],
+                                    packageId: parsedJson['list'][index]
+                                        ['packageId'],
+                                    packageTitle: parsedJson['list'][index]
+                                        ['packageTitle'],
+                                    price: parsedJson['list'][index]['price']
+                                        .toString(),
+                                    rating: parsedJson['list'][index]['rating'].toString(),
+                                    travelAgencyId: parsedJson['list'][index]['travelAgencyId'],
+                                    duration: parsedJson['list'][index]['duration']),
+                              );
+                            },
                           );
                         }
                       } else {
