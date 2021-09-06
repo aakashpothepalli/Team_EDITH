@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:swasth/modules/components/infocard.dart';
 import 'package:swasth/modules/models.dart/packagemodel.dart';
+import 'package:swasth/services/api.dart';
+import 'package:swasth/services/servicelocator.dart';
 import 'package:swasth/utils/textstyles.dart';
 import 'package:swasth/utils/themeconfig.dart';
+import 'package:dio/dio.dart';
 
 class PackageCard extends StatefulWidget {
   final Package package;
@@ -14,6 +17,8 @@ class PackageCard extends StatefulWidget {
 }
 
 class _PackageCardState extends State<PackageCard> {
+  bool isLoading = false;
+
   void showDetails(BuildContext context) {
     showModalBottomSheet(
         backgroundColor: Colors.transparent,
@@ -76,22 +81,77 @@ class _PackageCardState extends State<PackageCard> {
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.0),
-                          color: Palette.yellow),
-                      height: 50,
-                      width: 175,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Proceed'),
-                          Text(
-                            'This will ask your doctor for approval',
-                            style: lightTextStyle.copyWith(fontSize: 9),
-                          )
-                        ],
+                    child: GestureDetector(
+                      onTap: () async {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        Response<dynamic> response;
+                        try {
+                          response = await ServiceLocator<Api>()
+                              .POST(Api.sendBooking, {
+                            "patientId": '12106',
+                            "packageId": widget.package.packageId,
+                          });
+                          print(response.statusCode);
+                          if (response.statusCode == 200) {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Dialog(
+                                    child: Container(
+                                      height: 200,
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Yay! Your choice is noted',
+                                            style: titleTextStyle,
+                                          ),
+                                          Text(
+                                            'Once your doctor approves this from his side, you can make the final payment.',
+                                            style: regularTextStyle,
+                                          ),
+                                          Text(
+                                            "You can view the status under 'My Packages'",
+                                            style: regularTextStyle,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                });
+                          }
+                        } catch (e) {
+                          print('error detected');
+                          print(e);
+                        }
+                        print(response);
+                        setState(() {
+                          isLoading = false;
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            color: Palette.yellow),
+                        height: 50,
+                        width: 175,
+                        child: isLoading
+                            ? CircularProgressIndicator()
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Proceed'),
+                                  Text(
+                                    'This will ask your doctor for approval',
+                                    style: lightTextStyle.copyWith(fontSize: 9),
+                                  )
+                                ],
+                              ),
                       ),
                     ),
                   )

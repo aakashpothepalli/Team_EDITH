@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:math' as math;
 
+import 'package:swasth/utils/textstyles.dart';
+
 class Spinner extends StatefulWidget {
   @override
   _SpinnerState createState() => _SpinnerState();
@@ -52,7 +54,37 @@ class _SpinnerState extends State<Spinner> with SingleTickerProviderStateMixin {
                       context: context,
                       builder: (BuildContext context) {
                         return Dialog(
-                          child: Text("You've found an easter egg!"),
+                          child: Container(
+                              padding: EdgeInsets.all(8),
+                              height: 300,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "You've found an easter egg!",
+                                    style: titleTextStyle,
+                                  ),
+                                  Text(
+                                    "Did you know that 'swasth' in Sanskrit stands for well-being? Oh, and our logo's triangular design is inspired by the 3 entities it connects",
+                                    style: regularTextStyle,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Image.asset(
+                                    'easter.png',
+                                    height: 50,
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    "Want some fun? Check out ",
+                                    style: lightTextStyle,
+                                  )
+                                ],
+                              )),
                         );
                       });
                 },

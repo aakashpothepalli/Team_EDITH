@@ -26,11 +26,15 @@ class Api {
   // Getters for API end-points
   static String get getShopList =>
       'https://team-edith.glitch.me/customer/listPackages?patientId=12106';
+  static String get sendBooking => 'https://team-edith.glitch.me/customer/book';
   Api() {
     options = BaseOptions(
       baseUrl: baseUrl,
     );
     _dio = new Dio(options);
+    _dio.options.headers = <String, dynamic>{
+      "Content-Type": 'application/json',
+    };
   }
 
   // ignore: non_constant_identifier_names
@@ -62,7 +66,6 @@ class Api {
     print(path);
     _dio.options.headers = <String, dynamic>{
       "Content-Type": 'application/json',
-      "Authorization": _authToken,
     };
 
     Response<dynamic> response;
