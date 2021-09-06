@@ -28,6 +28,13 @@ export default function PatientCard({patientId,patientName,bookings,category,des
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
+  async function getDetails(){
+    let response = await fetch(`https://team-edith.glitch.me/doctor/patientDetails?patientId=`+patientId);
+    let data = await response.json();
+    console.log(data);
+
+    alert("PatientId - "+data.patientId + "\n Password - "+ data.pass)
+  }
   return (
     <Card className={classes.root}>
       <CardContent>
@@ -50,13 +57,18 @@ export default function PatientCard({patientId,patientName,bookings,category,des
             {booking['package']['description']}
           <br />
           
-        </Typography>)).reverse()
+        </Typography>))
         }
         
       </CardContent>
       <div style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
       <CardActions>
         <Button size="small" color="primary" variant="contained">Confirm</Button>
+      </CardActions>
+      <CardActions>
+        <Button size="small" color="primary" variant="contained"
+          onClick={getDetails}
+        >View Credentials</Button>
       </CardActions>
       </div>
     </Card>

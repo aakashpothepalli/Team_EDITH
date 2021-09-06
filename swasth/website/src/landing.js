@@ -10,6 +10,7 @@ import PatientCard from "./components/patientCard"
 import axios from "axios";
 import { makeStyles } from '@material-ui/core/styles';
 import AddPatient from "./components/addPatient";
+import { CircularProgress } from "@material-ui/core";
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
@@ -25,6 +26,7 @@ const useStyles = makeStyles({
 });
 export default function Landing() {
   let [patients,setPatients] = React.useState([]);
+  let [loading,setLoading] = React.useState(true);
   async function getPatients() {
 
     const response = await axios.get('https://team-edith.glitch.me/doctor/listPatients');
@@ -34,12 +36,11 @@ export default function Landing() {
   const classes = useStyles();
 
   useEffect(  () => {
-
-    getPatients()
+    getPatients().then(()=>setLoading(false));
     setTimeout(() => {
       getPatients()
     },3000)
-  })
+  },[])
   return (
   <div >
       <div className={classes.root}>
@@ -54,22 +55,26 @@ export default function Landing() {
           </Toolbar>
       </AppBar>
       </div>
-    <div style={{margin:20}}>
-    <List component="nav" aria-label="main mailbox folders">
-        {patients.map(p => 
-        <PatientCard 
-        patientName={p.patientName}
-        patientId = {p.patientId}
-        category = {p.category}
-        description = {p.description??""}
-        bookings = {p.bookings??[]}/>)}
-        {/* <PatientCard patientName= {'aakash'}/> */}
-        {/* <PatientCard />
-        <PatientCard />
-        <PatientCard /> */}
+      {loading==true
+      ?<CircularProgress/>:
+      (
+        <div style={{margin:20}}>
+        <List component="nav" aria-label="main mailbox folders">
+            {patients.map(p => 
+            <PatientCard 
+            patientName={p.patientName}
+            patientId = {p.patientId}
+            category = {p.category}
+            description = {p.description??""}
+            bookings = {p.bookings??[]}/>)}
+            {/* <PatientCard patientName= {'aakash'}/> */}
+            {/* <PatientCard />
+            <PatientCard />
+            <PatientCard /> */}
 
-      </List>
-    </div>
+          </List>
+        </div>
+        )}
   </div>);
 
 }
