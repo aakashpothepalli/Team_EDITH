@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:provider/provider.dart';
 import 'package:swasth/app.dart';
+import 'package:swasth/services/servicelocator.dart';
 import 'package:swasth/utils/router.dart';
 import 'package:swasth/utils/themeconfig.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // createLocator();
+  createLocator();
   runApp(
     MyApp(),
   );
