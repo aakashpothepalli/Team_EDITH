@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function PatientCard({patientId,patientName,bookings,category,description}) {
+export default function PatientCard({patientId,patientName,bookings,category,description,isTravel}) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   let [confirmLoading, setConfirmLoading] = React.useState(false);
@@ -47,6 +47,16 @@ export default function PatientCard({patientId,patientName,bookings,category,des
       window.location.reload();
     }
 
+  }
+  async function CompleteTour(packageId){
+    setConfirmLoading(true);
+    let response = await axios.post(`https://team-edith.glitch.me/travel/completeTour`,{
+      patientId,packageId
+    });
+    if(response.status==200){
+      alert("Tour completed successfully");
+      window.location.reload();
+    }
   }
   return (
     <Card className={classes.root}>
@@ -75,12 +85,22 @@ export default function PatientCard({patientId,patientName,bookings,category,des
         <div style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
 
           <CardActions>
+            {isTravel==true?(
             <Button size="small" color="primary" variant="contained"
-            disabled={booking['confirmed']}
-             style={{backgroundColor:booking['confirmed']==false?null:'green'}}
-              onClick = {()=>confirmPackage(booking['packageId'])}
-            >{booking['confirmed']==false?'Confirm':'Confirmed'}
-            </Button>
+            disabled={booking['completed']}
+             style={{backgroundColor:(booking['completed']!=true)?'null':'green'}}
+              onClick = {()=>CompleteTour(booking['packageId'])}
+
+            >{(booking['completed']!=true)?'Complete Tour':'Tour Completed'}
+            </Button>):(
+              <Button size="small" color="primary" variant="contained"
+              disabled={booking['confirmed']}
+               style={{backgroundColor:booking['confirmed']==false?null:'green'}}
+                onClick = {()=>confirmPackage(booking['packageId'])}
+              >{booking['confirmed']==false?'Confirm':'Confirmed'}
+              </Button>
+            )}
+            
         </CardActions>
         </div>
         <br/>
@@ -91,9 +111,9 @@ export default function PatientCard({patientId,patientName,bookings,category,des
       <div style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
       
       <CardActions>
-        <Button size="small" color="primary" variant="contained"
+        {isTravel==true?<div/>:<Button size="small" color="primary" variant="contained"
           onClick={getDetails}
-        >View Credentials</Button>
+        >View Credentials</Button>}
       </CardActions>
       </div>
     </Card>
