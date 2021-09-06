@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
+    margin:20
   },
   bullet: {
     display: 'inline-block',
@@ -23,30 +24,36 @@ const useStyles = makeStyles({
   },
 });
 
-export default function PatientCard({patientId,patientName,bookings,category}) {
+export default function PatientCard({patientId,patientName,bookings,category,description}) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
+        {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
           Word of the Day
+        </Typography> */}
+        <Typography variant="h5" component="h2">
+          {patientName}
         </Typography>
         <Typography variant="h5" component="h2">
-          be{bull}nev{bull}o{bull}lent
+          {description}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          adjective
+          Category  <div style={{color:category}}>{category}</div>
         </Typography>
-        <Typography variant="body2" component="p">
-          well meaning and kindly.
+        {bookings.map(booking => (
+          <Typography variant="body2" component="p">
+            {booking['package']['description']}
           <br />
-          {'"a benevolent smile"'}
-        </Typography>
+          
+        </Typography>))
+        }
+        
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small" color="primary" variant="contained">Confirm</Button>
       </CardActions>
     </Card>
   );
