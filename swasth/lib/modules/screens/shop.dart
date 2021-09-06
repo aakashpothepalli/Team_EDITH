@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swasth/modules/components/packagecard.dart';
 import 'package:swasth/utils/themeconfig.dart';
 
 class Shop extends StatefulWidget {
@@ -20,7 +21,8 @@ class _ShopState extends State<Shop> {
           Text(
             'Hello there,\nAakash',
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-          )
+          ),
+          PackageCard()
         ],
       ),
     );

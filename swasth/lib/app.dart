@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:swasth/modules/general/navigationbar.dart';
-import 'package:swasth/modules/tourist/shop.dart';
-import 'package:swasth/modules/tourist/yourpackages.dart';
+import 'package:swasth/modules/components/navigationbar.dart';
+import 'package:swasth/modules/screens/shop.dart';
+import 'package:swasth/modules/screens/yourpackages.dart';
 
 class App extends StatefulWidget {
   App({Key key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swasth/app.dart';
-import 'package:swasth/modules/tourist/yourpackages.dart';
+import 'package:swasth/modules/screens/yourpackages.dart';
 
 const HOME_PAGE = '/home';
 const YOUR_PACKAGES = '/yourpackages';
