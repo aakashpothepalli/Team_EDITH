@@ -43,18 +43,22 @@ export default function PatientCard({patientId,patientName,bookings,category,des
         <Typography className={classes.pos} color="textSecondary">
           Category  <div style={{color:category}}>{category}</div>
         </Typography>
+        <h5>Packages selected</h5>
+
         {bookings.map(booking => (
           <Typography variant="body2" component="p">
             {booking['package']['description']}
           <br />
           
-        </Typography>))
+        </Typography>)).reverse()
         }
         
       </CardContent>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
       <CardActions>
         <Button size="small" color="primary" variant="contained">Confirm</Button>
       </CardActions>
+      </div>
     </Card>
   );
 }
