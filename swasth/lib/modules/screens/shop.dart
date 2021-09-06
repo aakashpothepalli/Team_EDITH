@@ -67,7 +67,7 @@ class _ShopState extends State<Shop> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hello there,\nAakash',
+              'Hello there,\nArun',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             Text(
