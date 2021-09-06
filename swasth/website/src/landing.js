@@ -36,6 +36,9 @@ export default function Landing() {
   useEffect(  () => {
 
     getPatients()
+    setTimeout(() => {
+      getPatients()
+    },3000)
   })
   return (
   <div >
@@ -59,7 +62,7 @@ export default function Landing() {
         patientId = {p.patientId}
         category = {p.category}
         description = {p.description??""}
-        bookings = {p.bookings}/>)}
+        bookings = {p.bookings??[]}/>)}
         {/* <PatientCard patientName= {'aakash'}/> */}
         {/* <PatientCard />
         <PatientCard />

@@ -13,6 +13,11 @@ import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import AddIcon from '@material-ui/icons/Add';
+import { TextField } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -31,8 +36,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function AddPatient() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
-
+  let [category, setCategory] = React.useState('');
+  let [infoText, setInfoText] = React.useState('');
+  let [patientName, setPatientName] = React.useState('');
+  let [loading, setLoading] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -40,14 +47,31 @@ export default function AddPatient() {
   const handleClose = () => {
     setOpen(false);
   };
+  async function submitDetails(){
+    setLoading(true);
+    let response = await fetch('https://team-edith.glitch.me/doctor/addPatient', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        category: category,
+        patientName: patientName,
+      }),
+    });
+    let data = await response.json();
+    console.log(data);
+    setOpen(false);
+  }
 
   return (
     <div>
+      {/* <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} /> */}
       <IconButton className = {classes.menuButton}edge="start"  color="inherit" aria-label="menu"
                 onClick={handleClickOpen}
               >
               <AddIcon />
-    </IconButton>
+      </IconButton>
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar>
@@ -55,21 +79,73 @@ export default function AddPatient() {
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Sound
+              Add Patient
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              save
+            <Button autoFocus color="inherit" onClick={submitDetails}>
+              {(loading==false)?'save':(<CircularProgress style={{color:"white"}} />)}
             </Button>
           </Toolbar>
         </AppBar>
         <List>
-          <ListItem button>
-            <ListItemText primary="Phone ringtone" secondary="Titania" />
+            
+          <ListItem>
+            <TextField 
+            onChange={(e) => setPatientName(e.target.value)}
+
+            id="outlined-basic" label="Patient Name" variant="outlined" />
+
           </ListItem>
           <Divider />
-          <ListItem button>
-            <ListItemText primary="Default notification ringtone" secondary="Tethys" />
-          </ListItem>
+          <ListItem text>
+          <InputLabel id="demo-simple-select-label">Category</InputLabel>
+
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={category}
+              label="Category"
+              onChange={(e) =>{
+                let cat = e.target.value
+                if(cat === 'green'){
+                  setInfoText('Green: Patient is healthy, They are allowed to do all activities')
+                }
+                else if(cat === 'yellow'){
+                  setInfoText(
+`Yellow: Care required, but can venture out
+General constraints: 
+  Physical activity must be avoided
+  Crowds must be avoided
+Possible activities:
+  City landmarks drive-through
+  Drive-in theatres
+  Historical/themed city drive
+                  `)}
+                  else if(cat === 'red'){
+                    setInfoText(
+`Red: Utmost care required
+General constraints: 
+  Patient must avoid getting out of bed for most part
+  Minimal contact with outsiders
+Possible activities:
+  Local radio stations/programmes
+  Local T.V channels/programmes
+  Essential bollywood binge`)
+                  }
+                
+                setCategory(e.target.value)
+                
+                }}
+            >
+              <MenuItem value={'red'}>Red</MenuItem>
+              <MenuItem value={'yellow'}>Yellow</MenuItem>
+              <MenuItem value={'green'}>Green</MenuItem>
+            </Select>         
+         </ListItem>
+         <Divider />
+
+         <ListItem text style={{whiteSpace:'pre-wrap'}}>
+          {infoText}
+         </ListItem>
         </List>
       </Dialog>
     </div>
