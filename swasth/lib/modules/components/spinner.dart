@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'dart:math' as math;
 
 import 'package:swasth/utils/textstyles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Spinner extends StatefulWidget {
   @override
@@ -72,15 +73,33 @@ class _SpinnerState extends State<Spinner> with SingleTickerProviderStateMixin {
                                   SizedBox(
                                     height: 8,
                                   ),
-                                  Image.asset(
-                                    'easter.png',
-                                    height: 50,
+                                  GestureDetector(
+                                    onTap: () async {
+                                      String url =
+                                          'https://www.theraleighregister.com/deathly-hallows.html';
+                                      if (await canLaunch(url)) {
+                                        await launch(
+                                          url,
+                                          forceSafariVC: false,
+                                          forceWebView: false,
+                                          headers: <String, String>{
+                                            'my_header_key': 'my_header_value'
+                                          },
+                                        );
+                                      } else {
+                                        throw 'Could not launch $url';
+                                      }
+                                    },
+                                    child: Image.asset(
+                                      'easter.png',
+                                      height: 50,
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 8,
                                   ),
                                   Text(
-                                    "Want some fun? Check out ",
+                                    "Want some fun? Tap this egg!",
                                     style: lightTextStyle,
                                   )
                                 ],
