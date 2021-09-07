@@ -26,11 +26,13 @@ class _HistoryCardState extends State<HistoryCard> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+
     return GestureDetector(
       child: Container(
         margin: const EdgeInsets.all(5.0),
         padding: EdgeInsets.all(10),
-        height: 140,
+        height: height * 0.15,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
             color: !widget.isComplete
@@ -41,25 +43,32 @@ class _HistoryCardState extends State<HistoryCard> {
           children: [
             Text(
               widget.title,
-              style: titleTextStyle,
+              style: titleTextStyle.copyWith(
+                  color: widget.isComplete ? Palette.lightgray : Colors.black),
             ),
             Text(
               "Package ID: $widget.packageId",
-              style: lightTextStyle,
+              style: lightTextStyle.copyWith(
+                  color: widget.isComplete ? Palette.lightgray : Colors.black),
             ),
             SizedBox(
               height: 8,
             ),
             widget.isComplete
-                ? Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.0),
-                        color: Palette.yellow),
-                    height: 30,
-                    width: 100,
-                    child: Text(
-                      'Rate',
-                      style: regularTextStyle.copyWith(fontSize: 9),
+                ? Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color: Palette.yellow),
+                      height: height * 0.035,
+                      width: 100,
+                      child: Center(
+                        child: Text(
+                          'Rate',
+                          style: regularTextStyle,
+                        ),
+                      ),
                     ),
                   )
                 : Text(
