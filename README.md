@@ -17,7 +17,8 @@ Our backend involves **NodeJS**, and is hosted on **Glitch**. We have used **Det
 
 ## Try it out yourself!
 
-- [Click here to download the mobile app (for patient/medical tourist)](https://drive.google.com/drive/folders/1zTxvcvhiyl2w9var-z7RMq1ZWp6peza-?usp=sharing)
+- [Click here to download the mobile app (for patient/medical tourist)](https://drive.google.com/drive/folders/1zTxvcvhiyl2w9var-z7RMq1ZWp6peza-?usp=sharing) 
+  P.S: there are some easter eggs in the mobile app! :)
 - [Click here to check out the web-app (for doctors/hospital and travel agency)](https://swasth-edith.vercel.app/)
 
 
