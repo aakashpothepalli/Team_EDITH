@@ -11,9 +11,20 @@ import {
 import TravelAgencyPage from './travelLanding';
 import TravelLoginPage from './travelLogin';
 
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 
 function App() {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#274937'
+      }
+    }
+  });
+  
   return (
+    <MuiThemeProvider theme={theme}>
+
     <Router>
     <Switch>
           <Route path="/doctor">
@@ -30,7 +41,8 @@ function App() {
           </Route>
         </Switch>
     </Router>
-    
+    </MuiThemeProvider>
+
   );
 }
 

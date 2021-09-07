@@ -88,14 +88,14 @@ export default function PatientCard({patientId,patientName,bookings,category,des
             {isTravel==true?(
             <Button size="small" color="primary" variant="contained"
             disabled={booking['completed']}
-             style={{backgroundColor:(booking['completed']!=true)?'null':'green'}}
+             style={{}}
               onClick = {()=>CompleteTour(booking['packageId'])}
 
             >{(booking['completed']!=true)?'Complete Tour':'Tour Completed'}
             </Button>):(
               <Button size="small" color="primary" variant="contained"
               disabled={booking['confirmed']}
-               style={{backgroundColor:booking['confirmed']==false?null:'green'}}
+               style={{}}
                 onClick = {()=>confirmPackage(booking['packageId'])}
               >{booking['confirmed']==false?'Confirm':'Confirmed'}
               </Button>

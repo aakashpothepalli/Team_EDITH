@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AddPatient from "./components/addPatient";
 import { CircularProgress } from "@material-ui/core";
 import {useCookies} from "react-cookie";
+import AddPackage from "./components/addPackage";
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
@@ -53,8 +54,7 @@ export default function TravelAgencyPage() {
               <Typography variant="h6" className={classes.title} >
               Swasth Travel Agency Portal
               </Typography>
-              <AddPatient/>
-
+              <AddPackage travelAgencyId = {cookie['travel-auth']}/>
           </Toolbar>
       </AppBar>
       </div>

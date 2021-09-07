@@ -13,11 +13,10 @@ By Team E.D.I.T.H, for IEEE's HACKtheCRISIS, 2021.
 Our backend involves **NodeJS**, and is hosted on **Glitch**. We have used **Deta.sh** for the database.
 
 
-A few resources to get you started if this is your first Flutter project:
+## Try it out yourself!
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- [Click here to download the mobile app (for patient/medical tourist)](https://drive.google.com/drive/folders/1zTxvcvhiyl2w9var-z7RMq1ZWp6peza-?usp=sharing)
+  P.S Includes easter eggs! 
+- [Click here to check out the web-app (for doctors/hospital and travel agency)](https://swasth-edith.vercel.app/)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
