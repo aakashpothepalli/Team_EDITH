@@ -89,7 +89,7 @@ class _PackageCardState extends State<PackageCard> {
                         try {
                           response = await ServiceLocator<Api>()
                               .POST(Api.sendBooking, {
-                            "patientId": '29239',
+                            "patientId": '91914',
                             "packageId": widget.package.packageId,
                           });
                           print(response.statusCode);

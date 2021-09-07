@@ -71,7 +71,7 @@ class _ShopState extends State<Shop> {
               height: 50,
             ),
             Text(
-              'Hello there,\nArun',
+              'Hello there,\nThomas',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             Text(
