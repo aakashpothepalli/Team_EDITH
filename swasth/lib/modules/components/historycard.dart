@@ -30,7 +30,7 @@ class _HistoryCardState extends State<HistoryCard> {
       child: Container(
         margin: const EdgeInsets.all(5.0),
         padding: EdgeInsets.all(10),
-        height: 100,
+        height: 140,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
             color: !widget.isComplete
@@ -55,9 +55,12 @@ class _HistoryCardState extends State<HistoryCard> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.0),
                         color: Palette.yellow),
-                    height: 50,
+                    height: 30,
                     width: 100,
-                    child: Text('Rate'),
+                    child: Text(
+                      'Rate',
+                      style: regularTextStyle.copyWith(fontSize: 9),
+                    ),
                   )
                 : Text(
                     widget.isConfirmed
