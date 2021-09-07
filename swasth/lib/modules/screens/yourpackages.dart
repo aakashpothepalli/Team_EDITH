@@ -116,18 +116,27 @@ class _YourPackagesState extends State<YourPackages> {
 
                           return Container(
                             height: height * 0.32,
-                            child: ListView.builder(
-                                itemCount: upcominglist.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return HistoryCard(
-                                    isComplete: false,
-                                    isConfirmed: upcominglist[index]
-                                        ['confirmed'],
-                                    title: upcominglist[index]['package']
-                                        ['packageTitle'],
-                                    packageId: upcominglist[index]['packageId'],
-                                  );
-                                }),
+                            child: upcominglist.isEmpty
+                                ? Text(
+                                    "Once you choose an activity package, you can view it's status here",
+                                    style: lightTextStyle.copyWith(
+                                        color: Palette.gray),
+                                    textAlign: TextAlign.center,
+                                  )
+                                : ListView.builder(
+                                    itemCount: upcominglist.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return HistoryCard(
+                                        isComplete: false,
+                                        isConfirmed: upcominglist[index]
+                                            ['confirmed'],
+                                        title: upcominglist[index]['package']
+                                            ['packageTitle'],
+                                        packageId: upcominglist[index]
+                                            ['packageId'],
+                                      );
+                                    }),
                           );
                         }
                       } else {
@@ -190,18 +199,27 @@ class _YourPackagesState extends State<YourPackages> {
 
                           return Container(
                             height: 200,
-                            child: ListView.builder(
-                                itemCount: completelist.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return HistoryCard(
-                                    isComplete: true,
-                                    isConfirmed: completelist[index]
-                                        ['confirmed'],
-                                    title: completelist[index]['package']
-                                        ['packageTitle'],
-                                    packageId: completelist[index]['packageId'],
-                                  );
-                                }),
+                            child: completelist.isEmpty
+                                ? Text(
+                                    'Once you finish activities, you will see them here, and can rate them',
+                                    style: lightTextStyle.copyWith(
+                                        color: Palette.darkblue),
+                                    textAlign: TextAlign.center,
+                                  )
+                                : ListView.builder(
+                                    itemCount: completelist.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return HistoryCard(
+                                        isComplete: true,
+                                        isConfirmed: completelist[index]
+                                            ['confirmed'],
+                                        title: completelist[index]['package']
+                                            ['packageTitle'],
+                                        packageId: completelist[index]
+                                            ['packageId'],
+                                      );
+                                    }),
                           );
                         }
                       } else {
